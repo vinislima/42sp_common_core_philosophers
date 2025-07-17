@@ -1,0 +1,189 @@
+Philosophers
+I never thought philosophy would be so deadly
+Summary:
+In this project, you will learn the basics of threading a process.
+You will learn how to create threads and explore the use of mutexes.
+Version: 11.2
+Contents
+I Introduction 2
+II Common Instructions 3
+III Overview 5
+IV Global rules 6
+V Mandatory part 8
+VI Bonus part 9
+VII Submission and peer-evaluation 10
+1
+Chapter I
+Introduction
+Philosophy (from Greek, philosophia, literally "love of wisdom") is the study of general
+and fundamental questions about existence, knowledge, values, reason, mind, and language. Such questions are often framed as problems to be analyzed or solved. The term
+was probably coined by Pythagoras (c. 570 – 495 BCE). Philosophical methods include
+questioning, critical discussion, rational argument, and systematic presentation.
+Classic philosophical questions include: Can anything be truly known and proven? What
+is most real? Philosophers also pose more practical and concrete questions such as: Is
+there the best way to live? Is it better to be just or unjust (if one can get away with it)?
+Do humans have free will?
+Historically, the term ’philosophy’ referred to any body of knowledge. From the time
+of Ancient Greek philosopher Aristotle to the 19th century, "natural philosophy" encompassed astronomy, medicine, and physics. For example, Newton’s 1687 work, Mathematical Principles of Natural Philosophy, was later classified as a physics book.
+In the 19th century, the growth of modern research universities led academic philosophy
+and other disciplines to professionalize and specialize. In the modern era, some investigations that were traditionally part of philosophy became separate academic disciplines,
+including psychology, sociology, linguistics, and economics.
+Other investigations closely related to art, science, politics, or other pursuits remained
+part of philosophy. For example, is beauty objective or subjective? Are there many
+scientific methods or just one? Is political utopia a hopeful dream or hopeless fantasy?
+Major sub-fields of academic philosophy include metaphysics ("concerned with the fundamental nature of reality and being"), epistemology (about the "nature and grounds of
+knowledge [and]... its limits and validity"), ethics, aesthetics, political philosophy, logic
+and philosophy of science.
+2
+Chapter II
+Common Instructions
+• Your project must be written in C.
+• Your project must be written in accordance with the Norm. If you have bonus
+files/functions, they are included in the norm check, and you will receive a 0 if
+there is a norm error.
+• Your functions should not quit unexpectedly (segmentation fault, bus error, double free, etc.) except for undefined behavior. If this occurs, your project will be
+considered non-functional and will receive a 0 during the evaluation.
+• All heap-allocated memory must be properly freed when necessary. Memory leaks
+will not be tolerated.
+• If the subject requires it, you must submit a Makefile that compiles your source
+files to the required output with the flags -Wall, -Wextra, and -Werror, using cc.
+Additionally, your Makefile must not perform unnecessary relinking.
+• Your Makefile must at contain at least the rules $(NAME), all, clean, fclean and
+re.
+• To submit bonuses for your project, you must include a bonus rule in your Makefile,
+which will add all the various headers, libraries, or functions that are not allowed in
+the main part of the project. Bonuses must be placed in _bonus.{c/h} files, unless
+the subject specifies otherwise. The evaluation of mandatory and bonus parts is
+conducted separately.
+• If your project allows you to use your libft, you must copy its sources and its
+associated Makefile into a libft folder. Your project’s Makefile must compile
+the library by using its Makefile, then compile the project.
+• We encourage you to create test programs for your project, even though this work
+does not need to be submitted and will not be graded. It will give you an
+opportunity to easily test your work and your peers’ work. You will find these tests
+especially useful during your defence. Indeed, during defence, you are free to use
+your tests and/or the tests of the peer you are evaluating.
+• Submit your work to the assigned Git repository. Only the work in the Git repository will be graded. If Deepthought is assigned to grade your work, it will occur
+3
+Philosophers I never thought philosophy would be so deadly
+after your peer-evaluations. If an error happens in any section of your work during
+Deepthought’s grading, the evaluation will stop.
+4
+Chapter III
+Overview
+Here are the key things you need to know to succeed in this assignment:
+• One or more philosophers sit at a round table.
+There is a large bowl of spaghetti in the middle of the table.
+• The philosophers take turns eating, thinking, and sleeping.
+While they are eating, they are not thinking nor sleeping;
+while thinking, they are not eating nor sleeping;
+and, of course, while sleeping, they are not eating nor thinking.
+• There are also forks on the table. There are as many forks as philosophers.
+• Since eating spaghetti with just one fork is impractical, a philosopher must pick up
+both the fork to their right and the fork to their left before eating.
+• When a philosopher has finished eating, they put their forks back on the table and
+start sleeping. Once awake, they start thinking again. The simulation stops when
+a philosopher dies of starvation.
+• Every philosopher needs to eat and should never starve.
+• Philosophers do not communicate with each other.
+• Philosophers do not know if another philosopher is about to die.
+• Needless to say, philosophers should avoid dying!
+5
+Chapter IV
+Global rules
+You have to write a program for the mandatory part and another one for the bonus part
+(if you decide to do the bonus part). They both have to comply with the following rules:
+• Global variables are forbidden!
+• Your program(s) must take the following arguments:
+number_of_philosophers time_to_die time_to_eat time_to_sleep
+[number_of_times_each_philosopher_must_eat]
+◦ number_of_philosophers: The number of philosophers and also the number
+of forks.
+◦ time_to_die (in milliseconds): If a philosopher has not started eating within
+time_to_die milliseconds since the start of their last meal or the start of the
+simulation, they die.
+◦ time_to_eat (in milliseconds): The time it takes for a philosopher to eat.
+During that time, they will need to hold two forks.
+◦ time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
+◦ number_of_times_each_philosopher_must_eat (optional argument): If all
+philosophers have eaten at least number_of_times_each_philosopher_must_eat
+times, the simulation stops. If not specified, the simulation stops when a
+philosopher dies.
+• Each philosopher has a number ranging from 1 to number_of_philosophers.
+• Philosopher number 1 sits next to philosopher number number_of_philosophers.
+Any other philosopher, numbered N, sits between philosopher N - 1 and philosopher
+N + 1.
+6
+Philosophers I never thought philosophy would be so deadly
+About the logs of your program:
+• Any state change of a philosopher must be formatted as follows:
+◦ timestamp_in_ms X has taken a fork
+◦ timestamp_in_ms X is eating
+◦ timestamp_in_ms X is sleeping
+◦ timestamp_in_ms X is thinking
+◦ timestamp_in_ms X died
+Replace timestamp_in_ms with the current timestamp in milliseconds
+and X with the philosopher number.
+• A displayed state message should not overlap with another message.
+• A message announcing a philosopher’s death must be displayed within 10 ms of
+their actual death.
+• Again, philosophers should avoid dying!
+Your program must not have any data races.
+7
+Chapter V
+Mandatory part
+Program name philo
+Turn in files Makefile, *.h, *.c, in directory philo/
+Makefile NAME, all, clean, fclean, re
+Arguments number_of_philosophers time_to_die time_to_eat
+time_to_sleep
+[number_of_times_each_philosopher_must_eat]
+External functs. memset, printf, malloc, free, write,
+usleep, gettimeofday, pthread_create,
+pthread_detach, pthread_join, pthread_mutex_init,
+pthread_mutex_destroy, pthread_mutex_lock,
+pthread_mutex_unlock
+Libft authorized No
+Description Philosophers with threads and mutexes
+The specific rules for the mandatory part are:
+• Each philosopher must be represented as a separate thread.
+• There is one fork between each pair of philosophers. Therefore, if there are several
+philosophers, each philosopher has a fork on their left side and a fork on their right
+side. If there is only one philosopher, they will have access to just one fork.
+• To prevent philosophers from duplicating forks, you should protect each fork’s state
+with a mutex.
+8
+Chapter VI
+Bonus part
+Program name philo_bonus
+Turn in files Makefile, *.h, *.c, in directory philo_bonus/
+Makefile NAME, all, clean, fclean, re
+Arguments number_of_philosophers time_to_die time_to_eat
+time_to_sleep
+[number_of_times_each_philosopher_must_eat]
+External functs. memset, printf, malloc, free, write, fork, kill,
+exit, pthread_create, pthread_detach, pthread_join,
+usleep, gettimeofday, waitpid, sem_open, sem_close,
+sem_post, sem_wait, sem_unlink
+Libft authorized No
+Description Philosophers with processes and semaphores
+The program of the bonus part takes the same arguments as the mandatory program. It
+has to comply with the requirements of the Global rules chapter.
+The specific rules for the bonus part are:
+• All the forks are put in the middle of the table.
+• They have no states in memory, but the number of available forks is represented by
+a semaphore.
+• Each philosopher must be represented as a separate process. However, the main
+process should not act as a philosopher.
+The bonus part will only be assessed if the mandatory part is
+PERFECT. Perfect means the mandatory part has been integrally done
+and works without malfunctioning. If you have not passed ALL the
+mandatory requirements, your bonus part will not be evaluated at all.
+9
+Chapter VII
+Submission and peer-evaluation
+Submit your assignment in your Git repository as usual. Only the work inside your repository will be evaluated during the defense. Don’t hesitate to double-check the names of
+your files to ensure they are correct.
+Mandatory part directory: philo/
+Bonus part directory: philo_bonus/
+V L ( L p aW 
