@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 22:43:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/17 23:22:20 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/17 23:28:01 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	init_simulation(t_simulation *sim, int argc, char **argv)
 		free(sim->philosophers);
 		return (0);
 	}
-	if (!init_mutexes(sim));
+	if (!init_mutexes(sim))
 	{
 		free(sim->philosophers);
 		free(sim->forks);
