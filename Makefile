@@ -6,7 +6,7 @@
 #    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/16 21:28:13 by vinda-si          #+#    #+#              #
-#    Updated: 2025/07/16 21:29:02 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/18 22:35:50 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ MAIN_SRC = main.c \
 		   init.c \
 		   monitor.c \
 		   simulation.c \
-		   utils.c
+		   utils.c \
+		   forks.c
 
 SRC = $(MAIN_SRC)
 

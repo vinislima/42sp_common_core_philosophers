@@ -6,12 +6,18 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 22:43:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/17 23:28:01 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/18 22:00:58 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/**
+ * @brief Validate command line arguments format and count
+ * @param argc Number of command line arguments
+ * @param argv Array of command line argument strings
+ * @return Returns 1 if arguments are valid, 0 otherwise
+ */
 static int	validate_args(int argc, char **argv)
 {
 	int	i;
@@ -36,6 +42,13 @@ static int	validate_args(int argc, char **argv)
 	return (1); 
 }
 
+/**
+ * @brief Parse and store command line arguments into simulation structure
+ * @param sim Pointer to simulation structure to store parsed values
+ * @param argc Number of command line arguments
+ * @param argv Array of command line arguments strings
+ * @return Returns 1 if parsing successful, 0 if invalid values
+ */
 static int	parse_arguments(t_simulation *sim, int argc, char **argv)
 {
 	sim->num_philosophers = atoi(argv[1]);
@@ -54,6 +67,11 @@ static int	parse_arguments(t_simulation *sim, int argc, char **argv)
 	return (1);
 }
 
+/**
+ * @brief Initialize all mutexes for the simulation
+ * @param sim Pointer to simulation structure containing mutex arrays
+ * @return Returns 1 if all mutexes initialized sucessfully, 0 on failure
+ */
 static int	init_mutexes(t_simulation *sim)
 {
 	int	i;
@@ -81,6 +99,10 @@ static int	init_mutexes(t_simulation *sim)
 	return (1);
 }
 
+/**
+ * @brief Initialize all philosopher structures with default values and fork assignments
+ * @param sim Pointer to simulation structure containing philosopher array
+ */
 static void	init_philoshophers(t_simulation *sim)
 {
 	int	i;
@@ -100,6 +122,13 @@ static void	init_philoshophers(t_simulation *sim)
 	}
 }
 
+/**
+ * @brief Initialize complete simulation structure with all components
+ * @param sim Pointer to simulation structure to initialize
+ * @param argc Number of command line arguments
+ * @param argv Array of command line arguments strings
+ * @return Returns 1 if initialization successful, 0 on failure
+ */
 int	init_simulation(t_simulation *sim, int argc, char **argv)
 {
 	if (!validate_args(argc, argv))

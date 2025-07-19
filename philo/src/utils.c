@@ -6,12 +6,16 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:20:47 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/17 23:29:04 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/18 22:04:25 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/**
+ * @brief Get current time in milliseconds using gettimeofday
+ * @return Returns current timestamp in milliseconds
+ */
 long	get_time(void)
 {
 	struct timeval	tv;
@@ -20,6 +24,10 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
+/**
+ * @brief Sleep for specified duration with high precision using usleep
+ * @param duration Time to sleep in milliseconds
+ */
 void	smart_sleep(long duration)
 {
 	long	start_time;
@@ -34,6 +42,12 @@ void	smart_sleep(long duration)
 	}
 }
 
+/**
+ * @brief Thread-safe printing of philosopher status messages
+ * @param sim Pointer to simulation structure containing print mutex
+ * @param id Philosopher ID number
+ * @param message Status message to print
+ */
 void	safe_print(t_simulation *sim, int id, char *message)
 {
 	long	timestamp;
