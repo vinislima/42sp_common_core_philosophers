@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 22:18:09 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/18 22:33:17 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 14:58:02 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	take_left_fork(t_philosopher *philo)
  * @brief Take right fork with proper deadlock avoidance
  * @param philo Pointer to philosopher structure
  */
-static void take_right_fork(t_philosopher *philo)
+static void	take_right_fork(t_philosopher *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
 	safe_print(philo->simulation, philo->id, "has taken a fork");
