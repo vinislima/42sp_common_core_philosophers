@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:32:50 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/19 00:01:36 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/20 20:18:30 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	*monitor_routine(void *arg)
 			pthread_mutex_unlock(&sim->sim_lock);
 			return (NULL);
 		}
-		usleep(1000);
+		usleep(100);
 	}
 	return (NULL);
 }
