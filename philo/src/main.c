@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:12:40 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/18 23:31:23 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:53:59 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	cleanup_simulation(t_simulation *sim)
 {
 	int	i;
-	
+
 	if (sim->philosophers)
 	{
 		i = 0;

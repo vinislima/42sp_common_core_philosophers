@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 22:44:42 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/18 23:12:28 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:03:05 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,24 @@ void	*philosopher_routine(void *arg)
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal_time = philo->simulation->start_time;
 	pthread_mutex_unlock(&philo->meal_lock);
+	if (philo->simulation->num_philosophers == 1)
+	{
+		safe_print(philo->simulation, philo->id, "has taken a fork");
+		smart_sleep(philo->simulation->time_to_die);
+		return (NULL);
+	}
 	if (philo->id % 2 == 0)
 		smart_sleep(philo->simulation->time_to_eat / 2);
 	while (!check_simulation_end(philo->simulation))
 	{
 		think(philo);
 		acquire_forks(philo);
-		eat(philo);
-		release_forks(philo);
-		sleep_philo(philo);
+		if (!check_simulation_end(philo->simulation))
+		{
+			eat(philo);
+			release_forks(philo);
+			sleep_philo(philo);
+		}
 	}
 	return (NULL);
 }

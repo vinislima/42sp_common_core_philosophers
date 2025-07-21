@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 22:43:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/18 22:00:58 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:53:31 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	validate_args(int argc, char **argv)
 			return (0);
 		i++;
 	}
-	return (1); 
+	return (1);
 }
 
 /**
@@ -100,7 +100,8 @@ static int	init_mutexes(t_simulation *sim)
 }
 
 /**
- * @brief Initialize all philosopher structures with default values and fork assignments
+ * @brief Initialize all philosopher structures with default values and
+ * fork assignments
  * @param sim Pointer to simulation structure containing philosopher array
  */
 static void	init_philoshophers(t_simulation *sim)

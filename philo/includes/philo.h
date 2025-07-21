@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:50:46 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/18 22:34:39 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:58:18 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-typedef struct s_simulation t_simulation;
+typedef struct s_simulation	t_simulation;
 
 typedef struct s_philosopher
 {
