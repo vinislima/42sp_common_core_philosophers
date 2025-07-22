@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 22:43:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/21 19:53:31 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/21 23:22:29 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ static int	parse_arguments(t_simulation *sim, int argc, char **argv)
 		return (0);
 	if (argc == 6 && sim->num_meals_required <= 0)
 		return (0);
+	if (sim->num_philosophers > 200)
+		return (0);
+	if (sim->time_to_die < 60 || sim->time_to_eat < 60
+		|| sim->time_to_sleep < 60)
+		return (0);
 	return (1);
 }
 
@@ -113,7 +118,7 @@ static void	init_philoshophers(t_simulation *sim)
 	{
 		sim->philosophers[i].id = i + 1;
 		sim->philosophers[i].meals_eaten = 0;
-		sim->philosophers[i].last_meal_time = 0;
+		sim->philosophers[i].last_meal_time = sim->start_time;
 		sim->philosophers[i].left_fork = &sim->forks[i];
 		sim->philosophers[i].right_fork = &sim->forks[(i + 1)
 			% sim->num_philosophers];
