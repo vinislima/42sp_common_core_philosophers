@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 21:50:46 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/21 19:58:18 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:39:44 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ void	smart_sleep(long duration);
 int		check_simulation_end(t_simulation *sim);
 void	acquire_forks(t_philosopher *philo);
 void	release_forks(t_philosopher *philo);
+void	think(t_philosopher *philo);
+void	eat(t_philosopher *philo);
+void	sleep_philo(t_philosopher *philo);
 
 #endif

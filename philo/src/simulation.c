@@ -6,43 +6,28 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 22:44:42 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/21 20:03:05 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:43:52 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * @brief Philosopher thinking routine
- * @param philo Pointer to philosopher
+ * @brief Handles the main loop of a philosopher's actions
+ * @param philo Pointer to the philosopher structure
  */
-static void	think(t_philosopher *philo)
+static void	philosopher_life_cycle(t_philosopher *philo)
 {
-	safe_print(philo->simulation, philo->id, "is thinking");
-}
-
-/**
- * @brief Philosopher eating routine with meal tracking
- * @param philo Pointer to philosopher structure
- */
-static void	eat(t_philosopher *philo)
-{
-	safe_print(philo->simulation, philo->id, "is eating");
-	pthread_mutex_lock(&philo->meal_lock);
-	philo->last_meal_time = get_time();
-	philo->meals_eaten++;
-	pthread_mutex_unlock(&philo->meal_lock);
-	smart_sleep(philo->simulation->time_to_eat);
-}
-
-/**
- * @brief Philosopher sleeping routine
- * @param philo Pointer to philosopher structure
- */
-static void	sleep_philo(t_philosopher *philo)
-{
-	safe_print(philo->simulation, philo->id, "is sleeping");
-	smart_sleep(philo->simulation->time_to_sleep);
+	think(philo);
+	acquire_forks(philo);
+	if (check_simulation_end(philo->simulation))
+	{
+		release_forks(philo);
+		return ;
+	}
+	eat(philo);
+	release_forks(philo);
+	sleep_philo(philo);
 }
 
 /**
@@ -67,16 +52,7 @@ void	*philosopher_routine(void *arg)
 	if (philo->id % 2 == 0)
 		smart_sleep(philo->simulation->time_to_eat / 2);
 	while (!check_simulation_end(philo->simulation))
-	{
-		think(philo);
-		acquire_forks(philo);
-		if (!check_simulation_end(philo->simulation))
-		{
-			eat(philo);
-			release_forks(philo);
-			sleep_philo(philo);
-		}
-	}
+		philosopher_life_cycle(philo);
 	return (NULL);
 }
 
